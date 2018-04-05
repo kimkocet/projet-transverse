@@ -29,7 +29,7 @@ public class Main {
 		j1.jouerCoup(l, c, p);
 		System.out.println(p);
 		
-		
+		sc.close();
 	}
 
 }

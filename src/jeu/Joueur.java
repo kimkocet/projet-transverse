@@ -13,9 +13,7 @@ public class Joueur {
 	// place un pion sur la ligne 'l' et la colonne 'c'
 	public void jouerCoup(int l, int c, Plateau plateau) {
 		if(coupPossible(l,c, plateau)) {
-			int[][] p = new int[4][4];
-			p[l][c] = numero;
-			plateau.setPlateau(p);
+			plateau.setCase(l, c, this.numero);
 			coupPrecedent[0] = l;
 			coupPrecedent[1] = c;
 		}
