@@ -1,11 +1,9 @@
 package package1;
-import vue.*;
-import java.util.Scanner;
 
-import javax.swing.JFrame;
-
+import jeu.IANiveau1;
 import jeu.Joueur;
 import jeu.Plateau;
+import vue.Affichage;
 
 public class Main {
 
@@ -18,7 +16,6 @@ public class Main {
 		System.out.println(p);
 		
 		Joueur j1 = new Joueur(1);
-		Joueur j2 = new Joueur(2);
 		
 //		Scanner sc = new Scanner(System.in);
 //		int l;
@@ -33,7 +30,9 @@ public class Main {
 //		System.out.println(p);
 //		Affichage a = new Affichage();
 		
-		
+		IANiveau1 ia = new IANiveau1(2);
+		p.jouerIA(j1, ia);
+	
 	}
 
 }
