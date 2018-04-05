@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Plateau {
 
-	private static final int SIZE = 4;
+	public static final int SIZE = 4;
 	int[][] plateau = new int[SIZE][SIZE];
 
 	
@@ -50,7 +50,7 @@ public class Plateau {
 		return s;
 	}
 	
-	public void jouer(Joueur j1, Joueur j2) {
+	public void jouer2Joueurs(Joueur j1, Joueur j2) {
 		Scanner sc = new Scanner(System.in);
 		int l;
 		int c;
@@ -81,6 +81,33 @@ public class Plateau {
 					break;
 				}
 		} while(!jeuTermine(j1, j2));
+		sc.close();
+	}
+	
+	public void jouerIA(Joueur j1, IA ia) {
+		Scanner sc = new Scanner(System.in);
+		int l;
+		int c;
+		
+		boolean coup;
+		do {
+			do {
+				do {
+					System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
+					l = sc.nextInt();
+					c = sc.nextInt();
+				}while(l < 0 || l > 3 || c < 0 || c > 3);
+				coup = j1.jouerCoup(l, c, this);
+			} while(!coup);
+			System.out.println(this);
+			if(!jeuTermine(j1, ia)) {
+				ia.jouerCoupIA(this);
+				System.out.println(this);
+			}
+			else {
+				break;
+			}
+		} while(!jeuTermine(j1, ia));
 		sc.close();
 	}
 	

@@ -1,5 +1,6 @@
 package package1;
 
+import jeu.IANiveau1;
 import jeu.Joueur;
 import jeu.Plateau;
 
@@ -13,9 +14,9 @@ public class Main {
 		System.out.println(p);
 		
 		Joueur j1 = new Joueur(1);
-		Joueur j2 = new Joueur(2);
+		IANiveau1 ia = new IANiveau1(2);
 		
-		p.jouer(j1, j2);
+		p.jouerIA(j1, ia);
 	
 	}
 

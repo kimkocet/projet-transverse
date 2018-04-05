@@ -28,7 +28,7 @@ public class Joueur {
 		}
 	}
 	
-	public boolean coupPossible(int l, int c, Plateau plateau) {
+		protected boolean coupPossible(int l, int c, Plateau plateau) {
 		// si la case est déjà occupée
 		if(plateau.getPlateau()[l][c] != 0) return false;
 		// cas du premier coup (ne peut pas être joué sur les 4 cases du milieu)
