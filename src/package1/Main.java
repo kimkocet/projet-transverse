@@ -1,9 +1,8 @@
 package package1;
 
-import jeu.IANiveau1;
+import jeu.IANiveau3;
 import jeu.Joueur;
 import jeu.Plateau;
-import vue.Affichage;
 
 public class Main {
 
@@ -12,26 +11,35 @@ public class Main {
 		System.out.println("hello");
 	
 		Plateau p = new Plateau();
-		Affichage a = new Affichage(p);
+		//Affichage a = new Affichage(p);
 		System.out.println(p);
+		
+
 		
 		Joueur j1 = new Joueur(1);
 		
-//		Scanner sc = new Scanner(System.in);
-//		int l;
-//		int c;
-//		do {
-//			System.out.println("entrer la ligne suivie de la colonne du coup à jouer : ");
-//			l = sc.nextInt();
-//			c = sc.nextInt();
-//		}while(l < 0 || l > 3 || c < 0 || c > 3);
-//		
-//		j1.jouerCoup(l, c, p);
-//		System.out.println(p);
-//		Affichage a = new Affichage();
+		IANiveau3 ia = new IANiveau3(2);
 		
-		IANiveau1 ia = new IANiveau1(2);
-		p.jouerIA(j1, ia);
+		j1.jouerCoup(2, 0, p);
+		ia.jouerCoup(1, 0, p);
+		j1.jouerCoup(2, 2, p);
+		
+		ia.construireArbre(p, j1, 1);
+		
+		System.out.println(ia.getArbre());
+		
+//		Arbre<Plateau> arbre = new Arbre<Plateau>(p.clone());
+//		ArrayList<int[]> coups = j1.coupsPossibles(p);
+//		for(int i = 0; i < coups.size(); i++) {
+//			Plateau enfant = new Plateau(p);
+//			enfant.setCase(coups.get(i)[0], coups.get(i)[1], j1.getNumero());
+//			arbre.addEnfant(new Arbre<Plateau>(enfant));
+//		}
+//		System.out.println(arbre);
+		
+		//p.jouerIA(j1, ia);
+		
+		
 	
 	}
 
