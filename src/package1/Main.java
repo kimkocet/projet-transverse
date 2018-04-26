@@ -20,13 +20,12 @@ public class Main {
 		
 		IANiveau3 ia = new IANiveau3(2);
 		
-		j1.jouerCoup(2, 0, p);
-		ia.jouerCoup(1, 0, p);
-		j1.jouerCoup(2, 2, p);
-		
-		ia.construireArbre(p, j1, 1);
-		
-		System.out.println(ia.getArbre());
+//		j1.jouerCoup(0, 1, p);
+//		ia.jouerCoup(0, 0, p);
+//		j1.jouerCoup(3, 0, p);
+//		ia.jouerCoup(3, 2, p);
+		System.out.println(p);
+		p.jouerIANiveau3(j1, ia);
 		
 //		Arbre<Plateau> arbre = new Arbre<Plateau>(p.clone());
 //		ArrayList<int[]> coups = j1.coupsPossibles(p);
@@ -38,8 +37,6 @@ public class Main {
 //		System.out.println(arbre);
 		
 		//p.jouerIA(j1, ia);
-		
-		
 	
 	}
 
