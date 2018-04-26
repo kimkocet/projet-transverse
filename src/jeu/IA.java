@@ -6,5 +6,5 @@ public abstract class IA extends Joueur {
 		super(num);
 	}
 	
-	public abstract void jouerCoupIA(Plateau plateau);
+	public abstract void jouerCoupIA(Plateau plateau, Joueur j1);
 }

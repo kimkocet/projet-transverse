@@ -9,7 +9,7 @@ public class IANiveau1 extends IA {
 		super(num);
 	}
 	
-	public void jouerCoupIA(Plateau plateau) {
+	public void jouerCoupIA(Plateau plateau, Joueur j1) {
 		ArrayList<int[]> coups = coupsPossibles(plateau);
 		Random random = new Random();
 		int indice = random.nextInt(coups.size());
