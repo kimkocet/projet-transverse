@@ -17,16 +17,5 @@ public class IANiveau1 extends IA {
 		int c = coups.get(indice)[1];
 		jouerCoup(l, c, plateau);
 	}
-	
-	public ArrayList<int[]> coupsPossibles(Plateau plateau) {
-		ArrayList<int[]> resultat = new ArrayList<int[]>();
-		for(int i = 0; i < Plateau.SIZE; i++) {
-			for(int j = 0; j < Plateau.SIZE; j++) {
-				if(coupPossible(i, j, plateau)) {
-					resultat.add(new int[] {i, j});
-				}
-			}
-		}
-		return resultat;
-	}
+
 }

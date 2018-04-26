@@ -76,7 +76,7 @@ public class Affichage extends JFrame {
 						if (e.getSource() instanceof JButton) {
 							((JButton) e.getSource()).setText("X");
 							((JButton) e.getSource()).setEnabled(false);
-							p.setCase(i, j, 1);
+							//p.setCase(i, j, 1);
 						}
 					}
 				});

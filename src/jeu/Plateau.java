@@ -1,8 +1,9 @@
 package jeu;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Plateau {
+public class Plateau implements Cloneable {
 
 	public static final int SIZE = 4;
 	int[][] plateau = new int[SIZE][SIZE];
@@ -13,6 +14,14 @@ public class Plateau {
 		{
 			for(int j = 0 ; j < SIZE ; j++) {
 				plateau[i][j] = 0;
+			}
+		}
+	}
+	
+	public Plateau(Plateau p) {
+		for(int i = 0; i < SIZE; i++) {
+			for(int j = 0; j < SIZE; j++) {
+				this.plateau[i][j] = p.getPlateau()[i][j];
 			}
 		}
 	}
@@ -109,6 +118,104 @@ public class Plateau {
 			}
 		} while(!jeuTermine(j1, ia));
 		sc.close();
+	}
+	
+	public boolean aGagne(Joueur j1) {
+		int compteurJ1 = 0;
+		// 1 joueur a gagné (3 cases alignées)
+		// 1 ligne avec 3 cases à 1 ou 2
+		for(int i = 0; i < SIZE; i++) {
+			for(int col = 0; col < 2; col++) {
+				for(int j = 0; j < 3; j++) {
+					if(plateau[i][col+j] == j1.getNumero()) {
+						compteurJ1++;
+					}
+				}
+				if(compteurJ1 == 3) {
+					return true;
+				}
+				compteurJ1 = 0;
+			}
+		}
+		// 1 colonne avec 3 cases à 1 ou 2
+		// parcourt de chaque colonne
+		for(int j = 0; j < SIZE; j++) {
+			// 2 possibilités: début à la première ou deuxième ligne
+			for(int ligne = 0; ligne < 2; ligne++) {
+				// 3 lignes successives
+				for(int i = 0; i < 3; i++) {
+					if(plateau[i+ligne][j] == j1.getNumero()) {
+						compteurJ1++;
+					}
+				}
+				if(compteurJ1 == 3) {
+					return true;
+				}
+				compteurJ1 = 0;
+			}
+		}
+		// 1 diagonale (haut gauche à bas droite)
+		// 2 possibilitées, début à la case [0][0] ou à la case [1][1]
+		for(int deb = 0; deb < 2; deb++) {
+			for(int i = 0; i < 3; i++) {
+				if(plateau[deb+i][deb+i] == j1.getNumero()) {
+					compteurJ1++;
+				}
+			}
+			if(compteurJ1 == 3) {
+				return true;
+			}
+			compteurJ1 = 0;
+		}
+		// 1 diagonale inverse (haut droite à bas gauche)
+		for(int deb = 0; deb < 2; deb++) {
+			for(int i = 0; i < 3; i++) {
+				if(plateau[deb+i][SIZE-(deb+i)-1] == j1.getNumero()) {
+					compteurJ1++;
+				}
+			}
+			if(compteurJ1 == 3) {
+				return true;
+			}
+			compteurJ1 = 0;
+		}
+		// petites diagonales
+		for(int i = 1; i < 4; i++) {
+			if(plateau[i][i-1] == j1.getNumero()) {
+				compteurJ1++;
+			}
+		}
+		if(compteurJ1 == 3) {
+			return true;
+		}
+		compteurJ1 = 0;
+		for(int i = 0; i < 3; i++) {
+			if(plateau[i][i+1] == j1.getNumero()) {
+				compteurJ1++;
+			}
+		}
+		if(compteurJ1 == 3) {
+			return true;
+		}
+		compteurJ1 = 0;
+		for(int i = 1; i < 4; i++) {
+			if(plateau[i][SIZE-i] == j1.getNumero()) {
+				compteurJ1++;
+			}
+		}
+		if(compteurJ1 == 3) {
+			return true;
+		}
+		compteurJ1 = 0;
+		for(int i = 0; i < 3; i++) {
+			if(plateau[i][SIZE-2-i] == j1.getNumero()) {
+				compteurJ1++;
+			}
+		}
+		if(compteurJ1 == 3) {
+			return true;
+		}
+		return false;	
 	}
 	
 	public boolean jeuTermine(Joueur j1, Joueur j2) {
@@ -287,5 +394,24 @@ public class Plateau {
 			return true;
 		}
 		return false;	
+	}
+	
+	public Plateau clone() {
+	    Plateau p = new Plateau();
+	    int[][] copie = new int[SIZE][SIZE];
+//		for(int i = 0 ; i < SIZE ; i++ ) {
+//			for(int j = 0; j < SIZE; j++) {
+//				copie[i][j] = p.getPlateau()[i][j];
+//			}
+//		}
+
+		try {
+			p = (Plateau) super.clone();
+			p.plateau = this.plateau.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+	    // on renvoie le clone
+	    return p;
 	}
 }

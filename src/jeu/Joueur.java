@@ -1,6 +1,8 @@
 package jeu;
 
-public class Joueur {
+import java.util.ArrayList;
+
+public class Joueur implements Cloneable {
 	int numero;
 	int[] coupPrecedent = new int[2];
 	
@@ -28,7 +30,19 @@ public class Joueur {
 		}
 	}
 	
-		protected boolean coupPossible(int l, int c, Plateau plateau) {
+	public ArrayList<int[]> coupsPossibles(Plateau plateau) {
+		ArrayList<int[]> resultat = new ArrayList<int[]>();
+		for(int i = 0; i < Plateau.SIZE; i++) {
+			for(int j = 0; j < Plateau.SIZE; j++) {
+				if(coupPossible(i, j, plateau)) {
+					resultat.add(new int[] {i, j});
+				}
+			}
+		}
+		return resultat;
+	}
+	
+	protected boolean coupPossible(int l, int c, Plateau plateau) {
 		// si la case est déjà occupée
 		if(plateau.getPlateau()[l][c] != 0) return false;
 		// cas du premier coup (ne peut pas être joué sur les 4 cases du milieu)
@@ -47,5 +61,27 @@ public class Joueur {
 			l == coupPrecedent[0]+1 && c == coupPrecedent[1] ||
 			l == coupPrecedent[0]+1 && c == coupPrecedent[1]+1) return false;
 		return true;
+	}
+	
+	public Joueur clone() {
+	    Joueur j = new Joueur(numero);
+//		for(int i = 0 ; i < SIZE ; i++ ) {
+//			for(int j = 0; j < SIZE; j++) {
+//				copie[i][j] = p.getPlateau()[i][j];
+//			}
+//		}
+
+		try {
+			j = (Joueur) super.clone();
+			j.coupPrecedent = this.coupPrecedent.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+	    // on renvoie le clone
+	    return j;
+	}
+	
+	public String toString() {
+		return "Joueur " + this.numero + "\nCoup précédent : " + this.coupPrecedent[0] + " " + this.coupPrecedent[1];
 	}
 }
