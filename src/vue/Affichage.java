@@ -64,7 +64,6 @@ public class Affichage extends JFrame {
 	}
 
 	void affichageTableau(JPanel panCentre) {
-
 		panCentre.setLayout(new GridLayout(4, 4));
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -76,7 +75,6 @@ public class Affichage extends JFrame {
 						if (e.getSource() instanceof JButton) {
 							((JButton) e.getSource()).setText("X");
 							((JButton) e.getSource()).setEnabled(false);
-							//p.setCase(i, j, 1);
 						}
 					}
 				});

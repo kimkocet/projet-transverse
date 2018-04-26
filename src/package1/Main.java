@@ -37,6 +37,8 @@ public class Main {
 //		System.out.println(arbre);
 		
 		//p.jouerIA(j1, ia);
+		
+		
 	
 	}
 
