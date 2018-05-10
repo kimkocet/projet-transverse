@@ -75,6 +75,7 @@ public class Affichage extends JFrame {
 						if (e.getSource() instanceof JButton) {
 							((JButton) e.getSource()).setText("X");
 							((JButton) e.getSource()).setEnabled(false);
+							
 						}
 					}
 				});
@@ -82,6 +83,10 @@ public class Affichage extends JFrame {
 				panCentre.add(button[i][j]);
 			}
 		}
+	}
+	
+	void jouerIATableau(JPanel panCentre) {
+		
 	}
 
 }
