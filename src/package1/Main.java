@@ -12,7 +12,7 @@ public class Main {
 	
 		Plateau p = new Plateau();
 		//Affichage a = new Affichage(p);
-		System.out.println(p);
+		
 		
 
 		
@@ -20,10 +20,9 @@ public class Main {
 		
 		IANiveau3 ia = new IANiveau3(2);
 		
-//		j1.jouerCoup(0, 1, p);
-//		ia.jouerCoup(0, 0, p);
-//		j1.jouerCoup(3, 0, p);
-//		ia.jouerCoup(3, 2, p);
+		ia.jouerCoup(0, 0, p);
+		System.out.println(p);
+		
 		System.out.println(p);
 		p.jouerIANiveau3(j1, ia);
 		

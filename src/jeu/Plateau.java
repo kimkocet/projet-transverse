@@ -124,7 +124,7 @@ public class Plateau implements Cloneable {
 		Scanner sc = new Scanner(System.in);
 		int l;
 		int c;
-		int profondeur = 16;
+		int profondeur = 7;
 		boolean coup;
 		do {
 			do {
