@@ -3,6 +3,7 @@ package package1;
 import jeu.IANiveau3;
 import jeu.Joueur;
 import jeu.Plateau;
+import vue.Affichage;
 
 public class Main {
 
@@ -11,8 +12,13 @@ public class Main {
 		System.out.println("hello");
 	
 		Plateau p = new Plateau();
+<<<<<<< HEAD
 		//Affichage a = new Affichage(p);
 		
+=======
+		Affichage a = new Affichage(p);
+		System.out.println(p);
+>>>>>>> f6ab81ce807e8084f4f8130734097b3881153a78
 		
 
 		
@@ -25,6 +31,7 @@ public class Main {
 		
 		System.out.println(p);
 		p.jouerIANiveau3(j1, ia);
+		
 		
 //		Arbre<Plateau> arbre = new Arbre<Plateau>(p.clone());
 //		ArrayList<int[]> coups = j1.coupsPossibles(p);
