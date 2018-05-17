@@ -77,9 +77,10 @@ public class Affichage extends JFrame {
 	}
 
 	void affichageTableau(JPanel panCentre) {
-		
+	//	p.jouerIANiveau3(joueur, ia);
 		panCentre.setLayout(new GridLayout(4, 4));
 		count = 0;
+		
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				button[i][j] = new JButton();
@@ -104,6 +105,7 @@ public class Affichage extends JFrame {
 													count++;
 													((JButton) e.getSource()).setText("X");
 													System.out.println(ligne + " " + colonne);
+													retourneCoupJoueur(ligne, colonne);
 												}
 											}
 										else {
@@ -115,6 +117,7 @@ public class Affichage extends JFrame {
 											else {
 												System.out.println("b");
 												System.out.println(ligne + " " + colonne);
+												retourneCoupJoueur(ligne, colonne);
 												((JButton) e.getSource()).setText("X");
 											}
 										}
@@ -130,6 +133,12 @@ public class Affichage extends JFrame {
 				panCentre.add(button[i][j]);
 			
 			}}
+	}
+	
+	static int[] retourneCoupJoueur(int i, int j){
+		int[] tab = {i,j};
+		return tab;
+		
 	}
 	
 	void jouerIATableau(JPanel panCentre) {
