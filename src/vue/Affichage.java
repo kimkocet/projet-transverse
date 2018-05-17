@@ -1,20 +1,33 @@
 package vue;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
+import jeu.IANiveau3;
+import jeu.Joueur;
 import jeu.Plateau;
 
 public class Affichage extends JFrame {
 	private JPanel panCentre = new JPanel();
 	private Plateau p;
 	private JButton button[][] = new JButton[4][4];
+	private IANiveau3 ia;
+	private Joueur joueur;
+	int ligne;
+	int colonne;
+	int count;
 
-	public Affichage(Plateau p) {
+	public Affichage(Plateau p, Joueur j,Joueur j2) {
 		this.p = p;
+		ligne = 0;
+		colonne = 0;
+		ia = (IANiveau3) j;
+		joueur = j2;
 		this.setTitle("Morgpion");
 		this.setSize(700, 600);
 		this.setLocationRelativeTo(null);
@@ -64,25 +77,52 @@ public class Affichage extends JFrame {
 	}
 
 	void affichageTableau(JPanel panCentre) {
+		
 		panCentre.setLayout(new GridLayout(4, 4));
+		count = 0;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				button[i][j] = new JButton();
+				button[i][j].setEnabled(true);
 				button[i][j].addActionListener(new ActionListener() {
-
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						if (e.getSource() instanceof JButton) {
-							((JButton) e.getSource()).setText("X");
+							for(int i = 0 ; i < 4 ; i++) {
+								for(int j = 0; j < 4 ; j++) {
+									button[i][j].setEnabled(true);
+									if(e.getSource() == button[i][j]) {
+										ligne = i;
+										colonne = j;
+										if(count == 0) {
+												if( ((ligne == 1) && (colonne ==1) ) || ((ligne == 1) && (colonne == 2) ) || ((ligne == 2) || (colonne ==1) ) || ((ligne == 2) && (colonne == 2) )) {
+													JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer ce coup au 1er tour !", "Erreur", 
+														JOptionPane.ERROR_MESSAGE);
+													((JButton) e.getSource()).setEnabled(true);
+												}
+												else {
+													count++;
+													//((JButton) e.getSource()).setEnabled(false);
+													((JButton) e.getSource()).setText("X");
+												}
+											}
+										else {
+											((JButton) e.getSource()).setEnabled(false);
+											((JButton) e.getSource()).setText("X");
+										}
+										System.out.println(ligne + " " + colonne);
+									}
+								}
+							}
 							((JButton) e.getSource()).setEnabled(false);
 							
 						}
-					}
-				});
+					}}
+				);
 
 				panCentre.add(button[i][j]);
-			}
-		}
+			
+			}}
 	}
 	
 	void jouerIATableau(JPanel panCentre) {
