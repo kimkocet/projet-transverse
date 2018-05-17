@@ -120,6 +120,52 @@ public class Plateau implements Cloneable {
 		sc.close();
 	}
 	
+	public void jouerIANiveau2(Joueur j1, IANiveau3 ia) {
+		Scanner sc = new Scanner(System.in);
+		int l;
+		int c;
+		int profondeur = 16;
+		boolean coup;
+		do {
+			do {
+				do {
+					System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
+					l = sc.nextInt();
+					c = sc.nextInt();
+				} while(l < 0 || l > 3 || c < 0 || c > 3);
+				coup = j1.jouerCoup(l, c, this);
+			} while(!coup);
+			System.out.println(this);
+			if(!jeuTermine(j1, ia)) {
+				ia.jouerCoupIANiveau3(this, j1, profondeur);
+				System.out.println(this);
+				if(!jeuTermine(j1, ia)) {
+					do {
+						System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
+						l = sc.nextInt();
+						c = sc.nextInt();
+					} while(l < 0 || l > 3 || c < 0 || c > 3);
+					coup = j1.jouerCoup(l, c, this);
+					if(!jeuTermine(j1, ia)) {
+						ia.jouerCoupIA(this);
+						System.out.println(this);
+					}
+					else {
+						break;
+					}
+				}
+				else {
+					break;
+				}
+			}
+			else {
+				break;
+			}
+			profondeur -= 2;
+		} while(!jeuTermine(j1, ia));
+		sc.close();
+	}
+	
 	public void jouerIANiveau3(Joueur j1, IANiveau3 ia) {
 		Scanner sc = new Scanner(System.in);
 		int l;

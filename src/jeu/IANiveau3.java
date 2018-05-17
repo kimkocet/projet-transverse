@@ -1,6 +1,7 @@
 package jeu;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class IANiveau3 extends IA {
 
@@ -186,6 +187,12 @@ public class IANiveau3 extends IA {
 		@Override
 		public void jouerCoupIA(Plateau plateau) {
 			// TODO Auto-generated method stub
+			ArrayList<int[]> coups = coupsPossibles(plateau);
+			Random random = new Random();
+			int indice = random.nextInt(coups.size());
+			int l = coups.get(indice)[0];
+			int c = coups.get(indice)[1];
+			jouerCoup(l, c, plateau);
 			
 		}
 }

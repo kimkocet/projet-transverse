@@ -17,39 +17,16 @@ public class Main {
 		//Affichage a = new Affichage(p);
 		
 
-<<<<<<< HEAD
-		System.out.println(p);
-		
-		IANiveau3 ia = new IANiveau3(2);
-//		p.jouerIANiveau3(j1, ia);
-//		System.out.println(p);
-		Affichage a = new Affichage(p,ia, j1);
-=======
-		//Affichage a = new Affichage(p);
->>>>>>> 0defc067718c69bf9476eaffa614be53f385bebf
 
 		
 		IANiveau3 ia = new IANiveau3(2);
-		ia.jouerCoup(0, 2, p);
+		ia.jouerCoup(2, 0, p);
 		System.out.println(p);
-		
-		p.jouerIANiveau3(j1, ia);
+		p.jouerIANiveau2(j1, ia);
 //		System.out.println(p);
-		//Affichage a = new Affichage(p,ia, j1);
+//		Affichage a = new Affichage(p,ia, j1);
+		//Affichage a = new Affichage(p);
 	
-		
-		
-		
-//		Arbre<Plateau> arbre = new Arbre<Plateau>(p.clone());
-//		ArrayList<int[]> coups = j1.coupsPossibles(p);
-//		for(int i = 0; i < coups.size(); i++) {
-//			Plateau enfant = new Plateau(p);
-//			enfant.setCase(coups.get(i)[0], coups.get(i)[1], j1.getNumero());
-//			arbre.addEnfant(new Arbre<Plateau>(enfant));
-//		}
-//		System.out.println(arbre);
-		
-		//p.jouerIA(j1, ia);
 	
 	}
 
