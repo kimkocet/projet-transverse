@@ -12,13 +12,12 @@ public class Main {
 		System.out.println("hello");
 	
 		Plateau p = new Plateau();
-<<<<<<< HEAD
+
 		//Affichage a = new Affichage(p);
 		
-=======
+
 		Affichage a = new Affichage(p);
 		System.out.println(p);
->>>>>>> f6ab81ce807e8084f4f8130734097b3881153a78
 		
 
 		
