@@ -42,16 +42,16 @@ public class IANiveau3 extends IA {
 			ArrayList<int[]> coupsPossibles = this.coupsPossibles(plateau);
 			int max = -2;
 			int[] meilleurCoup = { -1, -1 };
-			for(int i = 0; i < 1 ; i++) {
+			for(int i = 0; i < coupsPossibles.size() ; i++) {
 				Plateau copiePlateau = plateau.clone();
 				Joueur copieIA = this.clone();
-				System.out.println(copieIA);
-				System.out.println("i = " + coupsPossibles.get(i)[0]);
-				System.out.println("j = " + coupsPossibles.get(i)[1]);
+				//System.out.println(copieIA);
+				//System.out.println("i = " + coupsPossibles.get(i)[0]);
+				//System.out.println("j = " + coupsPossibles.get(i)[1]);
 				copieIA.jouerCoup(coupsPossibles.get(i)[0], coupsPossibles.get(i)[1], copiePlateau);
-				System.out.println(copiePlateau);
-				int val = joueurMin(copiePlateau, j1.clone(), copieIA, profondeur);
-				System.out.println(val);
+				//System.out.println(copiePlateau);
+				int val = joueurMinElagage(copiePlateau, j1.clone(), copieIA, profondeur, -10^5, 10^5);
+				//System.out.println(val);
 				if(val > max) {
 					max = val;
 					meilleurCoup[0] = coupsPossibles.get(i)[0];
@@ -110,7 +110,56 @@ public class IANiveau3 extends IA {
 				//System.out.println(copiePlateau);
 				resultat = min(resultat, joueurMax(copiePlateau, copieJ1, ia, profondeur-1));
 			}
-			System.out.println(profondeur + " min resultat = " + resultat );
+			//System.out.println(profondeur + " min resultat = " + resultat );
+			return resultat;
+		}
+		
+		int joueurMaxElagage(Plateau plateau, Joueur j1, Joueur ia, int profondeur, int alpha, int beta) {
+			if(plateau.aGagne(j1) || plateau.aGagne(ia)) {
+				return h(plateau, j1, ia);
+			}
+			if(profondeur == 0) {
+				return h(plateau, j1, ia);
+			}
+			int resultat = alpha;
+			ArrayList<int[]> coupsPossibles = ia.coupsPossibles(plateau);
+			for(int i = 0; i < coupsPossibles.size(); i++) {
+				Plateau copiePlateau = plateau.clone();
+				Joueur copieIA = ia.clone();
+				//System.out.println("ia : " + coupsPossibles.get(i)[0] + " " + coupsPossibles.get(i)[1]);
+				//System.out.println(copieIA);
+				copieIA.jouerCoup(coupsPossibles.get(i)[0], coupsPossibles.get(i)[1], copiePlateau);
+				//System.out.println(profondeur);
+				//System.out.println(copiePlateau);
+				resultat = max(resultat, joueurMinElagage(copiePlateau, j1, copieIA, profondeur-1, resultat, beta));
+				if(resultat >= beta) return resultat;
+
+			}
+			//System.out.println(profondeur + " MAX resultat = " + resultat);
+			return resultat;
+		}
+		
+		int joueurMinElagage(Plateau plateau, Joueur j1, Joueur ia, int profondeur, int alpha, int beta) {
+			if(plateau.aGagne(j1) || plateau.aGagne(ia)) {
+				return h(plateau, j1, ia);
+			}
+			if(profondeur == 0) {
+				return h(plateau, j1, ia);
+			}
+			int resultat = beta;
+			ArrayList<int[]> coupsPossibles = j1.coupsPossibles(plateau);
+			for(int i = 0; i < coupsPossibles.size(); i++) {
+				Plateau copiePlateau = plateau.clone();
+				Joueur copieJ1 = j1.clone();
+				//System.out.println("j1 : " + coupsPossibles.get(i)[0] + " " + coupsPossibles.get(i)[1]);
+				//System.out.println(copieJ1);
+				copieJ1.jouerCoup(coupsPossibles.get(i)[0], coupsPossibles.get(i)[1], copiePlateau);
+				//System.out.println(profondeur);
+				//System.out.println(copiePlateau);
+				resultat = min(resultat, joueurMaxElagage(copiePlateau, copieJ1, ia, profondeur-1, alpha, resultat));
+				if(alpha >= resultat) return resultat;
+			}
+			//System.out.println(profondeur + " min resultat = " + resultat );
 			return resultat;
 		}
 		
