@@ -21,7 +21,7 @@ public class Main {
 
 		
 		IANiveau3 ia = new IANiveau3(2);
-		ia.jouerCoup(2, 3, p);
+		ia.jouerCoup(0, 2, p);
 		System.out.println(p);
 		
 		p.jouerIANiveau3(j1, ia);
