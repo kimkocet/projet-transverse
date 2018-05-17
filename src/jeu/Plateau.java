@@ -3,6 +3,8 @@ package jeu;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import vue.Affichage;
+
 public class Plateau implements Cloneable {
 
 	public static final int SIZE = 4;
@@ -121,6 +123,7 @@ public class Plateau implements Cloneable {
 	}
 	
 	public void jouerIANiveau3(Joueur j1, IANiveau3 ia) {
+		Affichage a = new Affichage(this,ia, j1);
 		Scanner sc = new Scanner(System.in);
 		int l;
 		int c;
@@ -128,12 +131,15 @@ public class Plateau implements Cloneable {
 		boolean coup;
 		do {
 			do {
-				do {
-					System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
-					l = sc.nextInt();
-					c = sc.nextInt();
-				} while(l < 0 || l > 3 || c < 0 || c > 3);
-				coup = j1.jouerCoup(l, c, this);
+				
+//					System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
+//					l = sc.nextInt();
+//					c = sc.nextInt();
+					
+					a.jouerAffichage();
+					l = a.getLigne();
+					c = a.getColonne();
+					coup = j1.jouerCoup(l, c, this);
 			} while(!coup);
 			System.out.println(this);
 			if(!jeuTermine(j1, ia)) {

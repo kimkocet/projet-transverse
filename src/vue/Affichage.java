@@ -21,6 +21,7 @@ public class Affichage extends JFrame {
 	int ligne;
 	int colonne;
 	int count;
+	int temoin;
 
 	public Affichage(Plateau p, Joueur j,Joueur j2) {
 		this.p = p;
@@ -33,7 +34,8 @@ public class Affichage extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(panCentre);
-		vueAccueil(panCentre);
+//		vueAccueil(panCentre);
+		affichageTableau(panCentre);
 		this.setVisible(true);
 	}
 
@@ -77,14 +79,22 @@ public class Affichage extends JFrame {
 	}
 
 	void affichageTableau(JPanel panCentre) {
-	//	p.jouerIANiveau3(joueur, ia);
 		panCentre.setLayout(new GridLayout(4, 4));
 		count = 0;
 		
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				button[i][j] = new JButton();
+				panCentre.add(button[i][j]);
+			}
+		}
+	}
+	
+	public void jouerAffichage() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
 				button[i][j].addActionListener(new ActionListener() {
+					
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						if (e.getSource() instanceof JButton) {
@@ -92,20 +102,23 @@ public class Affichage extends JFrame {
 								for(int j = 0; j < 4 ; j++) {
 									//button[i][j].setEnabled(true);
 									if(e.getSource() == button[i][j]) {
-										ligne = i;
-										colonne = j;
+										int l = i;
+										int c = j;
 										if(count == 0) {
-												if( ((ligne == 1) && (colonne ==1) ) || ((ligne == 1) && (colonne == 2) ) || ((ligne == 2) || (colonne ==1) ) || ((ligne == 2) && (colonne == 2) )) {
+												if( ((l == 1) && (c ==1) ) || ((l == 1) && (c == 2) ) || ((l == 2) || (c ==1) ) || ((l == 2) && (c == 2) )) {
 													JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer ce coup au 1er tour !", "Erreur", 
 														JOptionPane.ERROR_MESSAGE);
+													l = 0;
+													c = 0;
 													System.out.println("cout : " + count);
 													}
 												else {
 													System.out.println("a");
 													count++;
 													((JButton) e.getSource()).setText("X");
-													System.out.println(ligne + " " + colonne);
-													retourneCoupJoueur(ligne, colonne);
+													System.out.println(l + " " + c);
+													setLigne(l);
+													setColonne(c);
 												}
 											}
 										else {
@@ -116,9 +129,12 @@ public class Affichage extends JFrame {
 											}
 											else {
 												System.out.println("b");
-												System.out.println(ligne + " " + colonne);
-												retourneCoupJoueur(ligne, colonne);
+												System.out.println(l + " " + c);
+												setLigne(l);
+												setColonne(c);
+												//retourneCoupJoueur(ligne, colonne);
 												((JButton) e.getSource()).setText("X");
+												
 											}
 										}
 										
@@ -129,10 +145,8 @@ public class Affichage extends JFrame {
 						}
 					}}
 				);
-
-				panCentre.add(button[i][j]);
-			
-			}}
+			}
+		}
 	}
 	
 	static int[] retourneCoupJoueur(int i, int j){
@@ -141,6 +155,19 @@ public class Affichage extends JFrame {
 		
 	}
 	
+	public int getLigne() {
+		return ligne;
+	}
+	public int getColonne() {
+		return colonne;
+	}
+	
+	public void setColonne(int j) {
+		colonne = j;
+	}
+	public void setLigne(int i) {
+		ligne = i;
+	}
 	void jouerIATableau(JPanel panCentre) {
 		
 	}
