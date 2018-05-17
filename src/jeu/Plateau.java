@@ -124,7 +124,7 @@ public class Plateau implements Cloneable {
 		Scanner sc = new Scanner(System.in);
 		int l;
 		int c;
-		int profondeur = 7;
+		int profondeur = 16;
 		boolean coup;
 		do {
 			do {
@@ -143,9 +143,7 @@ public class Plateau implements Cloneable {
 			else {
 				break;
 			}
-			if(profondeur < 16) {
-				profondeur++;
-			}
+			profondeur--;
 		} while(!jeuTermine(j1, ia));
 		sc.close();
 	}

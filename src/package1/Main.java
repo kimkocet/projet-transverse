@@ -17,20 +17,26 @@ public class Main {
 		//Affichage a = new Affichage(p);
 		
 
+<<<<<<< HEAD
 		System.out.println(p);
 		
 		IANiveau3 ia = new IANiveau3(2);
 //		p.jouerIANiveau3(j1, ia);
 //		System.out.println(p);
 		Affichage a = new Affichage(p,ia, j1);
+=======
+		//Affichage a = new Affichage(p);
+>>>>>>> 0defc067718c69bf9476eaffa614be53f385bebf
 
 		
-		
-		
-		ia.jouerCoup(0, 0, p);
+		IANiveau3 ia = new IANiveau3(2);
+		ia.jouerCoup(2, 3, p);
 		System.out.println(p);
 		
-		System.out.println(p);
+		p.jouerIANiveau3(j1, ia);
+//		System.out.println(p);
+		//Affichage a = new Affichage(p,ia, j1);
+	
 		
 		
 		
