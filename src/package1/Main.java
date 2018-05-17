@@ -10,6 +10,9 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("hello");
+<<<<<<< HEAD
+		Joueur j1 = new Joueur(1);
+=======
 	
 		Plateau p = new Plateau();
 
@@ -18,18 +21,26 @@ public class Main {
 
 		Affichage a = new Affichage(p);
 		System.out.println(p);
-		
-
-		
-		Joueur j1 = new Joueur(1);
+<<<<<<< HEAD
+=======
+>>>>>>> f6ab81ce807e8084f4f8130734097b3881153a78
+>>>>>>> b02c317561ec400e0676496c1e694c1f3384b06a
+>>>>>>> 3374f382dbca040df5fa6f8ce8849ae30fbcc3c4
 		
 		IANiveau3 ia = new IANiveau3(2);
+		Plateau p = new Plateau();
+//		p.jouerIANiveau3(j1, ia);
+//		System.out.println(p);
+		Affichage a = new Affichage(p,ia, j1);
+
+		
+		
 		
 		ia.jouerCoup(0, 0, p);
 		System.out.println(p);
 		
 		System.out.println(p);
-		p.jouerIANiveau3(j1, ia);
+		
 		
 		
 //		Arbre<Plateau> arbre = new Arbre<Plateau>(p.clone());
