@@ -10,7 +10,19 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("hello");
+<<<<<<< HEAD
 		Joueur j1 = new Joueur(1);
+=======
+	
+		Plateau p = new Plateau();
+<<<<<<< HEAD
+		//Affichage a = new Affichage(p);
+		
+=======
+		Affichage a = new Affichage(p);
+		System.out.println(p);
+>>>>>>> f6ab81ce807e8084f4f8130734097b3881153a78
+>>>>>>> b02c317561ec400e0676496c1e694c1f3384b06a
 		
 		IANiveau3 ia = new IANiveau3(2);
 		Plateau p = new Plateau();
@@ -21,10 +33,9 @@ public class Main {
 		
 		
 		
-//		j1.jouerCoup(0, 1, p);
-//		ia.jouerCoup(0, 0, p);
-//		j1.jouerCoup(3, 0, p);
-//		ia.jouerCoup(3, 2, p);
+		ia.jouerCoup(0, 0, p);
+		System.out.println(p);
+		
 		System.out.println(p);
 		
 		
