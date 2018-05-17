@@ -93,7 +93,8 @@ public class Plateau implements Cloneable {
 		sc.close();
 	}
 	
-	public void jouerIA(Joueur j1, IA ia) {
+	// cas ou le joueur commence
+	public void jouerIANiveau1J(Joueur j1, IA ia) {
 		Scanner sc = new Scanner(System.in);
 		int l;
 		int c;
@@ -120,7 +121,37 @@ public class Plateau implements Cloneable {
 		sc.close();
 	}
 	
-	public void jouerIANiveau2(Joueur j1, IANiveau3 ia) {
+	// cas ou l'IA commence
+	public void jouerIANiveau1IA(Joueur j1, IA ia) {
+		Scanner sc = new Scanner(System.in);
+		int l;
+		int c;
+		
+		boolean coup;
+		do {
+
+			ia.jouerCoupIA(this);
+			System.out.println(this);
+			if(!jeuTermine(j1, ia)) {
+				do {
+					do {
+						System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
+						l = sc.nextInt();
+						c = sc.nextInt();
+					} while(l < 0 || l > 3 || c < 0 || c > 3);
+					coup = j1.jouerCoup(l, c, this);
+				} while(!coup);
+				System.out.println(this);
+			}
+			else {
+				break;
+			}
+		} while(!jeuTermine(j1, ia));
+		sc.close();
+	}
+	
+	// cas ou le joueur commence
+	public void jouerIANiveau2J(Joueur j1, IANiveau3 ia) {
 		Scanner sc = new Scanner(System.in);
 		int l;
 		int c;
@@ -141,11 +172,15 @@ public class Plateau implements Cloneable {
 				System.out.println(this);
 				if(!jeuTermine(j1, ia)) {
 					do {
-						System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
-						l = sc.nextInt();
-						c = sc.nextInt();
-					} while(l < 0 || l > 3 || c < 0 || c > 3);
+						do {
+							System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
+							l = sc.nextInt();
+							c = sc.nextInt();
+						} while(l < 0 || l > 3 || c < 0 || c > 3);
+						coup = j1.jouerCoup(l, c, this);
+					} while(!coup);
 					coup = j1.jouerCoup(l, c, this);
+					System.out.println(this);
 					if(!jeuTermine(j1, ia)) {
 						ia.jouerCoupIA(this);
 						System.out.println(this);
@@ -166,7 +201,59 @@ public class Plateau implements Cloneable {
 		sc.close();
 	}
 	
-	public void jouerIANiveau3(Joueur j1, IANiveau3 ia) {
+	// cas ou l'IA commence
+	public void jouerIANiveau2IA(Joueur j1, IANiveau3 ia) {
+		Scanner sc = new Scanner(System.in);
+		int l;
+		int c;
+		int profondeur = 16;
+		boolean coup;
+		do {
+			ia.jouerCoupIANiveau3(this, j1, profondeur);
+			System.out.println(this);
+			if(!jeuTermine(j1, ia)) {
+				do {
+					do {
+						System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
+						l = sc.nextInt();
+						c = sc.nextInt();
+					} while(l < 0 || l > 3 || c < 0 || c > 3);
+					coup = j1.jouerCoup(l, c, this);
+				} while(!coup);
+				coup = j1.jouerCoup(l, c, this);
+				System.out.println(this);
+				if(!jeuTermine(j1, ia)) {
+					ia.jouerCoupIA(this);
+					System.out.println(this);
+					if(!jeuTermine(j1, ia)) {
+						do {
+							do {
+								System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
+								l = sc.nextInt();
+								c = sc.nextInt();
+							} while(l < 0 || l > 3 || c < 0 || c > 3);
+							coup = j1.jouerCoup(l, c, this);
+						} while(!coup);
+						System.out.println(this);
+					}
+					else {
+						break;
+					}
+				}
+				else {
+					break;
+				}
+			}
+			else {
+				break;
+			}
+			profondeur -= 2;
+		} while(!jeuTermine(j1, ia));
+		sc.close();
+	}
+	
+	// cas ou le joueur commence
+	public void jouerIANiveau3J(Joueur j1, IANiveau3 ia) {
 		Scanner sc = new Scanner(System.in);
 		int l;
 		int c;
@@ -184,6 +271,35 @@ public class Plateau implements Cloneable {
 			System.out.println(this);
 			if(!jeuTermine(j1, ia)) {
 				ia.jouerCoupIANiveau3(this, j1, profondeur);
+				System.out.println(this);
+			}
+			else {
+				break;
+			}
+			profondeur--;
+		} while(!jeuTermine(j1, ia));
+		sc.close();
+	}
+	
+	// cas ou l'IA commence
+	public void jouerIANiveau3IA(Joueur j1, IANiveau3 ia) {
+		Scanner sc = new Scanner(System.in);
+		int l;
+		int c;
+		int profondeur = 16;
+		boolean coup;
+		do {
+			ia.jouerCoupIANiveau3(this, j1, profondeur);
+			System.out.println(this);
+			if(!jeuTermine(j1, ia)) {
+				do {
+					do {
+						System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
+						l = sc.nextInt();
+						c = sc.nextInt();
+					} while(l < 0 || l > 3 || c < 0 || c > 3);
+					coup = j1.jouerCoup(l, c, this);
+				} while(!coup);
 				System.out.println(this);
 			}
 			else {

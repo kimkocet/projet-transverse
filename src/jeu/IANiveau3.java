@@ -2,6 +2,7 @@ package jeu;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 public class IANiveau3 extends IA {
 
@@ -43,24 +44,48 @@ public class IANiveau3 extends IA {
 			ArrayList<int[]> coupsPossibles = this.coupsPossibles(plateau);
 			int max = -2;
 			int[] meilleurCoup = { -1, -1 };
+			// tableau des meilleurs coups possibles (qui permettent de gagner la partie)
+			Vector<int[]> meilleursCoups = new Vector<int[]>(0);
+			// pour chaque coup possible
 			for(int i = 0; i < coupsPossibles.size() ; i++) {
+				// on copie le plateau
 				Plateau copiePlateau = plateau.clone();
+				// on copie l'IA
 				Joueur copieIA = this.clone();
-				//System.out.println(copieIA);
-				//System.out.println("i = " + coupsPossibles.get(i)[0]);
-				//System.out.println("j = " + coupsPossibles.get(i)[1]);
+				// on simule le coup possible avec la copie de l'IA
 				copieIA.jouerCoup(coupsPossibles.get(i)[0], coupsPossibles.get(i)[1], copiePlateau);
-				//System.out.println(copiePlateau);
+				// on recupere la valeur de joueurMin
 				int val = joueurMinElagage(copiePlateau, j1.clone(), copieIA, profondeur, -10^5, 10^5);
-				//System.out.println(val);
+				// si cette valeur est superieur au max calculé précedemment
 				if(val > max) {
+					// on met à jour la valeur de max
 					max = val;
+					// on récupère le coup joué (qui est pour l'instant le meilleur coup)
 					meilleurCoup[0] = coupsPossibles.get(i)[0];
 					meilleurCoup[1] = coupsPossibles.get(i)[1];
+					// on réinitialise les meilleursCoups
+					meilleursCoups.clear();
+					// on ajoute le meilleurCoup au tableau des meilleurs coups
+					meilleursCoups.add(meilleurCoup);
+				}
+				// sinon si la valeur est égale au max
+				else if(val == max) {
+					// le coup simulé fait partie des meilleurs coups
+					meilleurCoup[0] = coupsPossibles.get(i)[0];
+					meilleurCoup[1] = coupsPossibles.get(i)[1];
+					meilleursCoups.add(meilleurCoup);
 				}
 			}
 			System.out.println("max = " + max);
-			this.jouerCoup(meilleurCoup[0], meilleurCoup[1], plateau);
+			
+			// on sélectionne un coup aléatoirement parmi les meilleurs coups
+			Random random = new Random();
+			int indice = random.nextInt(meilleursCoups.size());
+			int l = meilleursCoups.elementAt(indice)[0];
+			int c = meilleursCoups.elementAt(indice)[1];
+			
+			// on joue le coup
+			this.jouerCoup(l, c, plateau);
 			// TODO Auto-generated method stub
 		}
 		
@@ -80,11 +105,7 @@ public class IANiveau3 extends IA {
 			for(int i = 0; i < coupsPossibles.size(); i++) {
 				Plateau copiePlateau = plateau.clone();
 				Joueur copieIA = ia.clone();
-				//System.out.println("ia : " + coupsPossibles.get(i)[0] + " " + coupsPossibles.get(i)[1]);
-				//System.out.println(copieIA);
 				copieIA.jouerCoup(coupsPossibles.get(i)[0], coupsPossibles.get(i)[1], copiePlateau);
-				//System.out.println(profondeur);
-				//System.out.println(copiePlateau);
 				resultat = max(resultat, joueurMin(copiePlateau, j1, copieIA, profondeur-1));
 
 			}
@@ -104,14 +125,9 @@ public class IANiveau3 extends IA {
 			for(int i = 0; i < coupsPossibles.size(); i++) {
 				Plateau copiePlateau = plateau.clone();
 				Joueur copieJ1 = j1.clone();
-				//System.out.println("j1 : " + coupsPossibles.get(i)[0] + " " + coupsPossibles.get(i)[1]);
-				//System.out.println(copieJ1);
 				copieJ1.jouerCoup(coupsPossibles.get(i)[0], coupsPossibles.get(i)[1], copiePlateau);
-				//System.out.println(profondeur);
-				//System.out.println(copiePlateau);
 				resultat = min(resultat, joueurMax(copiePlateau, copieJ1, ia, profondeur-1));
 			}
-			//System.out.println(profondeur + " min resultat = " + resultat );
 			return resultat;
 		}
 		
@@ -127,16 +143,11 @@ public class IANiveau3 extends IA {
 			for(int i = 0; i < coupsPossibles.size(); i++) {
 				Plateau copiePlateau = plateau.clone();
 				Joueur copieIA = ia.clone();
-				//System.out.println("ia : " + coupsPossibles.get(i)[0] + " " + coupsPossibles.get(i)[1]);
-				//System.out.println(copieIA);
 				copieIA.jouerCoup(coupsPossibles.get(i)[0], coupsPossibles.get(i)[1], copiePlateau);
-				//System.out.println(profondeur);
-				//System.out.println(copiePlateau);
 				resultat = max(resultat, joueurMinElagage(copiePlateau, j1, copieIA, profondeur-1, resultat, beta));
 				if(resultat >= beta) return resultat;
 
 			}
-			//System.out.println(profondeur + " MAX resultat = " + resultat);
 			return resultat;
 		}
 		
@@ -152,15 +163,10 @@ public class IANiveau3 extends IA {
 			for(int i = 0; i < coupsPossibles.size(); i++) {
 				Plateau copiePlateau = plateau.clone();
 				Joueur copieJ1 = j1.clone();
-				//System.out.println("j1 : " + coupsPossibles.get(i)[0] + " " + coupsPossibles.get(i)[1]);
-				//System.out.println(copieJ1);
 				copieJ1.jouerCoup(coupsPossibles.get(i)[0], coupsPossibles.get(i)[1], copiePlateau);
-				//System.out.println(profondeur);
-				//System.out.println(copiePlateau);
 				resultat = min(resultat, joueurMaxElagage(copiePlateau, copieJ1, ia, profondeur-1, alpha, resultat));
 				if(alpha >= resultat) return resultat;
 			}
-			//System.out.println(profondeur + " min resultat = " + resultat );
 			return resultat;
 		}
 		
@@ -187,6 +193,8 @@ public class IANiveau3 extends IA {
 		@Override
 		public void jouerCoupIA(Plateau plateau) {
 			// TODO Auto-generated method stub
+			
+			// joue un coup aléatoirement parmi les coups possibles
 			ArrayList<int[]> coups = coupsPossibles(plateau);
 			Random random = new Random();
 			int indice = random.nextInt(coups.size());
