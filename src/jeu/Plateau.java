@@ -123,10 +123,10 @@ public class Plateau implements Cloneable {
 		sc.close();
 	}
 	
-<<<<<<< HEAD
+
 	public void jouerIANiveau3(Joueur j1, IANiveau3 ia) {
 		Affichage a = new Affichage(this,ia, j1);
-=======
+
 	// cas ou l'IA commence
 	public void jouerIANiveau1IA(Joueur j1, IA ia) {
 		Scanner sc = new Scanner(System.in);
