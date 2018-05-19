@@ -39,8 +39,6 @@ public class Joueur implements Cloneable {
 		}
 		else {
 			System.out.println("Ce coup ne peut pas être joué !");
-			JOptionPane.showMessageDialog(null, "Cette case a déjà été jouée !", "Erreur", 
-					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 	}
@@ -57,7 +55,7 @@ public class Joueur implements Cloneable {
 		return resultat;
 	}
 	
-	protected boolean coupPossible(int l, int c, Plateau plateau) {
+	public boolean coupPossible(int l, int c, Plateau plateau) {
 		// si la case est déjà occupée
 		if(plateau.getPlateau()[l][c] != 0) {
 			System.out.println("Case (" + l + ";" + c + ") déjà jouée");

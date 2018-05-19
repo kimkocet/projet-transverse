@@ -16,6 +16,10 @@ import jeu.Joueur;
 import jeu.Plateau;
 
 public class Affichage extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel panCentre = new JPanel();
 	private Plateau p;
 	private JButton button[][] = new JButton[4][4];
@@ -27,11 +31,11 @@ public class Affichage extends JFrame {
 	int temoin;
 	boolean flag;
 
-	public Affichage(Plateau p, Joueur j,Joueur j2) {
+	public Affichage(Plateau p, Joueur j1,Joueur j2) {
 		this.p = p;
 		ligne = 0;
 		colonne = 0;
-		ia = (IANiveau1) j;
+		ia = (IANiveau1) j1;
 		joueur = j2;
 		this.setTitle("Morgpion");
 		this.setSize(700, 600);
@@ -47,27 +51,39 @@ public class Affichage extends JFrame {
 			for (int k = 0; k < 4; k++) {
 				button[i][k] = new JButton();
 				button[i][k].addActionListener(new ActionListener() {
-
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if (e.getSource() instanceof JButton) {
 							for(int i = 0 ; i < 4 ; i++) {
 								for(int j = 0; j < 4 ; j++) {
 									if(e.getSource() == button[i][j]) {
-										((JButton) e.getSource()).setText("X");
-										setLigne(i);
-										setColonne(j);
-										System.out.println("(" + ligne + " ; " + colonne +")");
 										flag = true;
-										vueJouerIANiveau1J(j2, ia, p, panCentre);
-										
+										if(!j2.coupPossible(i, j, p)) {
+											JOptionPane.showMessageDialog(null, "Ce coup ne peut pas être joué !", "Erreur", 
+													JOptionPane.ERROR_MESSAGE);
+										}
+										else if(!p.jeuTermine(j2, ia)) {
+											((JButton) e.getSource()).setText("X");
+											setLigne(i);
+											setColonne(j);
+											System.out.println("(" + ligne + " ; " + colonne +")");
+											j2.jouerCoup(i, j, p);
+											System.out.println(this);
+											if(!p.jeuTermine(j2, ia)) {
+												ia.jouerCoupIA(p);
+												//recupérer la position du dernier coup joué pour positionner le coup de l'IA dans l'affichage
+												//button[ligne du dernier coup][colonne du dernier coup].setText("O")
+												int v = ia.getDerniereLigne();
+												int w = ia.getDerniereColonne();
+												button[v][w].setText("O");
+												button[v][w].setEnabled(false);
+											
+											}
+										}
 									}
-									
 								}
 							}
 						}
-						
-
 					}
 				}
 				);
@@ -132,8 +148,6 @@ public class Affichage extends JFrame {
 		}
 	}
 	
-<<<<<<< HEAD
-	
 	// cas ou le joueur commence
 	public void vueJouerIANiveau1J(Joueur j1, IA ia, Plateau p, JPanel panCentre) {
 		int l;
@@ -164,43 +178,6 @@ public class Affichage extends JFrame {
 				  new Timer(delay, taskPerformer).start();
 				
 				System.out.println(this);
-=======
-	public void jouerAffichage() {
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				button[i][j].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						if (e.getSource() instanceof JButton) {
-							for(int i = 0 ; i < 4 ; i++) {
-								for(int j = 0; j < 4 ; j++) {
-									if(e.getSource() == button[i][j]) {
-										int l = i;
-										int c = j;
-										//System.out.println("l = " + l + " c = " + c);
-										boolean coup = joueur.jouerCoup(l, c, p);
-										if( !coup ) {
-											JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer ce coup !", "Erreur", 
-												JOptionPane.ERROR_MESSAGE);
-											l = 0;
-											c = 0;
-										}
-										else {
-											System.out.println("a");
-											((JButton) e.getSource()).setText("X");
-											System.out.println(l + " " + c);
-											setLigne(l);
-											setColonne(c);
-											joueur.jouerCoup(l, c, p);
-										}
-									}
-								}
-							}
-							
-						}
-					}}
-				);
->>>>>>> 187f62c7637c6a4e482b533db0a0932f74771f93
 			}
 			else {
 				break;

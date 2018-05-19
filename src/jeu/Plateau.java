@@ -122,13 +122,6 @@ public class Plateau implements Cloneable {
 		} while(!jeuTermine(j1, ia));
 		sc.close();
 	}
-	
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> ef1df9c9bdd4664d7976fb379991a0950c90be75
 	// cas ou l'IA commence
 	public void jouerIANiveau1IA(Joueur j1, IA ia) {
 		Scanner sc = new Scanner(System.in);
@@ -171,13 +164,6 @@ public class Plateau implements Cloneable {
 					System.out.println("entrer la ligne suivie de la colonne du coup à jouer (joueur 1) : ");
 					l = sc.nextInt();
 					c = sc.nextInt();
-<<<<<<< HEAD
-=======
-					
-//					a.jouerAffichage();
-//					l = a.getLigne();
-//					c = a.getColonne();
->>>>>>> 187f62c7637c6a4e482b533db0a0932f74771f93
 					coup = j1.jouerCoup(l, c, this);
 			} while(!coup);
 			System.out.println(this);
