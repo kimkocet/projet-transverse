@@ -132,6 +132,7 @@ public class Affichage extends JFrame {
 		}
 	}
 	
+<<<<<<< HEAD
 	
 	// cas ou le joueur commence
 	public void vueJouerIANiveau1J(Joueur j1, IA ia, Plateau p, JPanel panCentre) {
@@ -163,6 +164,43 @@ public class Affichage extends JFrame {
 				  new Timer(delay, taskPerformer).start();
 				
 				System.out.println(this);
+=======
+	public void jouerAffichage() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				button[i][j].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						if (e.getSource() instanceof JButton) {
+							for(int i = 0 ; i < 4 ; i++) {
+								for(int j = 0; j < 4 ; j++) {
+									if(e.getSource() == button[i][j]) {
+										int l = i;
+										int c = j;
+										//System.out.println("l = " + l + " c = " + c);
+										boolean coup = joueur.jouerCoup(l, c, p);
+										if( !coup ) {
+											JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer ce coup !", "Erreur", 
+												JOptionPane.ERROR_MESSAGE);
+											l = 0;
+											c = 0;
+										}
+										else {
+											System.out.println("a");
+											((JButton) e.getSource()).setText("X");
+											System.out.println(l + " " + c);
+											setLigne(l);
+											setColonne(c);
+											joueur.jouerCoup(l, c, p);
+										}
+									}
+								}
+							}
+							
+						}
+					}}
+				);
+>>>>>>> 187f62c7637c6a4e482b533db0a0932f74771f93
 			}
 			else {
 				break;
