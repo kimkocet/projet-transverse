@@ -1,17 +1,22 @@
 package vue;
 
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import jeu.IA;
-import jeu.IANiveau3;
 import jeu.IANiveau1;
+import jeu.IANiveau3;
 import jeu.Joueur;
 import jeu.Plateau;
 
@@ -112,6 +117,8 @@ public class Affichage extends JFrame {
 		for (int i = 0; i < 4; i++) {
 			for (int k = 0; k < 4; k++) {
 				button[i][k] = new JButton();
+				button[i][k].setFont(new Font("Arial", Font.PLAIN, 60));
+				button[i][k].setBackground(Color.WHITE);
 				button[i][k].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -119,13 +126,13 @@ public class Affichage extends JFrame {
 							for(int i = 0 ; i < 4 ; i++) {
 								for(int j = 0; j < 4 ; j++) {
 									if(e.getSource() == button[i][j]) {
-										flag = true;
 										if(!joueur.coupPossible(i, j, p)) {
 											JOptionPane.showMessageDialog(null, "Ce coup ne peut pas être joué !", "Erreur", 
 													JOptionPane.ERROR_MESSAGE);
 										}
 										else if(!p.jeuTermine(joueur, ia)) {
 											((JButton) e.getSource()).setText("X");
+											((JButton) e.getSource()).setEnabled(false);
 											panCentre.validate();
 											setLigne(i);
 											setColonne(j);
