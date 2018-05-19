@@ -11,13 +11,6 @@ import jeu.Plateau;
 import vue.Affichage;
 
 public class Main {
-<<<<<<< HEAD
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Joueur j1 = new Joueur(1);
-=======
->>>>>>> a35ba0b224a50dd8050a728f8dc14f51a3de2e7b
 	
 	public static void menu() {
 		System.out.println("Choix du niveau (1, 2 ou 3) : ");
@@ -27,14 +20,7 @@ public class Main {
 			niveau = sc.nextInt();
 		} while(niveau < 1 || niveau > 3);
 		Plateau p = new Plateau();
-<<<<<<< HEAD
-
 		System.out.println(p);
-		
-		IANiveau3 ia = new IANiveau3(2);
-		p.jouerIANiveau3(j1, ia);
-
-=======
 		Joueur j1 = new Joueur(1);
 		IA ia;
 		switch(niveau) {
@@ -127,10 +113,11 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		menu();
-	
-	
->>>>>>> a35ba0b224a50dd8050a728f8dc14f51a3de2e7b
+		//menu();
+		Plateau p = new Plateau();
+		IANiveau3 ia = new IANiveau3(2);
+		Joueur j1 = new Joueur(1);
+		Affichage a = new Affichage(p, ia, j1);
 	}
 
 }

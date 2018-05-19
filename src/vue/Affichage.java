@@ -94,50 +94,30 @@ public class Affichage extends JFrame {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				button[i][j].addActionListener(new ActionListener() {
-					
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						if (e.getSource() instanceof JButton) {
 							for(int i = 0 ; i < 4 ; i++) {
 								for(int j = 0; j < 4 ; j++) {
-									//button[i][j].setEnabled(true);
 									if(e.getSource() == button[i][j]) {
 										int l = i;
 										int c = j;
-										if(count == 0) {
-												if( ((l == 1) && (c ==1) ) || ((l == 1) && (c == 2) ) || ((l == 2) || (c ==1) ) || ((l == 2) && (c == 2) )) {
-													JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer ce coup au 1er tour !", "Erreur", 
-														JOptionPane.ERROR_MESSAGE);
-													l = 0;
-													c = 0;
-													System.out.println("cout : " + count);
-													}
-												else {
-													System.out.println("a");
-													count++;
-													((JButton) e.getSource()).setText("X");
-													System.out.println(l + " " + c);
-													setLigne(l);
-													setColonne(c);
-												}
-											}
-										else {
-											if(((JButton) e.getSource()).getText()== "X") {
-												JOptionPane.showMessageDialog(null, "Cette case a déjà été jouée !", "Erreur", 
-														JOptionPane.ERROR_MESSAGE);
-												
-											}
-											else {
-												System.out.println("b");
-												System.out.println(l + " " + c);
-												setLigne(l);
-												setColonne(c);
-												//retourneCoupJoueur(ligne, colonne);
-												((JButton) e.getSource()).setText("X");
-												
-											}
+										//System.out.println("l = " + l + " c = " + c);
+										boolean coup = joueur.jouerCoup(l, c, p);
+										if( !coup ) {
+											JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer ce coup !", "Erreur", 
+												JOptionPane.ERROR_MESSAGE);
+											l = 0;
+											c = 0;
 										}
-										
+										else {
+											System.out.println("a");
+											((JButton) e.getSource()).setText("X");
+											System.out.println(l + " " + c);
+											setLigne(l);
+											setColonne(c);
+											joueur.jouerCoup(l, c, p);
+										}
 									}
 								}
 							}
