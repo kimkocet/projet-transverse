@@ -118,7 +118,7 @@ public class Main {
 		Plateau p = new Plateau();
 		Joueur j1 = new Joueur(1);
 		IA ia = new IANiveau1(2);
-		Affichage a = new Affichage(p,ia,j1);
+		Affichage a = new Affichage(p);
 	}
 
 }

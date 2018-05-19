@@ -23,77 +23,30 @@ public class Affichage extends JFrame {
 	private JPanel panCentre = new JPanel();
 	private Plateau p;
 	private JButton button[][] = new JButton[4][4];
-	private IANiveau1 ia;
+	private IA ia;
 	private Joueur joueur;
 	int ligne;
 	int colonne;
 	int count;
 	int temoin;
 	boolean flag;
+	int niveau;
+	int commence;
 
-	public Affichage(Plateau p, Joueur j1,Joueur j2) {
+	public Affichage(Plateau p) {
 		this.p = p;
 		ligne = 0;
 		colonne = 0;
-		ia = (IANiveau1) j1;
-		joueur = j2;
+		joueur = new Joueur(1);
 		this.setTitle("Morgpion");
 		this.setSize(700, 600);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(panCentre);
-//		vueAccueil(panCentre);
+		vueAccueil(panCentre);
 //		affichageTableau(panCentre);
 		panCentre.setLayout(new GridLayout(4, 4));
 		count = 0;
-		
-		for (int i = 0; i < 4; i++) {
-			for (int k = 0; k < 4; k++) {
-				button[i][k] = new JButton();
-				button[i][k].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() instanceof JButton) {
-							for(int i = 0 ; i < 4 ; i++) {
-								for(int j = 0; j < 4 ; j++) {
-									if(e.getSource() == button[i][j]) {
-										flag = true;
-										if(!j2.coupPossible(i, j, p)) {
-											JOptionPane.showMessageDialog(null, "Ce coup ne peut pas être joué !", "Erreur", 
-													JOptionPane.ERROR_MESSAGE);
-										}
-										else if(!p.jeuTermine(j2, ia)) {
-											((JButton) e.getSource()).setText("X");
-											setLigne(i);
-											setColonne(j);
-											System.out.println("(" + ligne + " ; " + colonne +")");
-											j2.jouerCoup(i, j, p);
-											System.out.println(this);
-											if(!p.jeuTermine(j2, ia)) {
-												ia.jouerCoupIA(p);
-												//recupérer la position du dernier coup joué pour positionner le coup de l'IA dans l'affichage
-												//button[ligne du dernier coup][colonne du dernier coup].setText("O")
-												int v = ia.getDerniereLigne();
-												int w = ia.getDerniereColonne();
-												button[v][w].setText("O");
-												button[v][w].setEnabled(false);
-											
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-				);
-					
-				
-				panCentre.add(button[i][k]);
-			}
-		}
-		
-		
 		this.setVisible(true);
 	}
 
@@ -121,6 +74,23 @@ public class Affichage extends JFrame {
 		panCentre.add(panHello);
 		panCentre.add(panCommencer);
 		panCentre.add(panCredit);
+		
+		// selection du niveau
+		niveau = 3;
+		switch(niveau) {
+			case 1:
+				ia = new IANiveau1(2);
+				break;
+			case 2:
+				ia = new IANiveau3(2);
+				break;
+			case 3:
+				ia = new IANiveau3(2);
+				break;
+		}
+		
+		// selection de qui commence (1 = le joueur commence, 0 = l'IA commence)
+		commence = 0;
 
 		commencer.addActionListener(new ActionListener() {
 
@@ -139,12 +109,99 @@ public class Affichage extends JFrame {
 	void affichageTableau(JPanel panCentre) {
 		panCentre.setLayout(new GridLayout(4, 4));
 		count = 0;
-		
 		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				button[i][j] = new JButton();
-				panCentre.add(button[i][j]);
+			for (int k = 0; k < 4; k++) {
+				button[i][k] = new JButton();
+				button[i][k].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (e.getSource() instanceof JButton) {
+							for(int i = 0 ; i < 4 ; i++) {
+								for(int j = 0; j < 4 ; j++) {
+									if(e.getSource() == button[i][j]) {
+										flag = true;
+										if(!joueur.coupPossible(i, j, p)) {
+											JOptionPane.showMessageDialog(null, "Ce coup ne peut pas être joué !", "Erreur", 
+													JOptionPane.ERROR_MESSAGE);
+										}
+										else if(!p.jeuTermine(joueur, ia)) {
+											((JButton) e.getSource()).setText("X");
+											panCentre.validate();
+											setLigne(i);
+											setColonne(j);
+											System.out.println("(" + ligne + " ; " + colonne +")");
+											joueur.jouerCoup(i, j, p);
+											System.out.println(this);
+											if(!p.jeuTermine(joueur, ia)) {
+												if(niveau == 1) {
+													ia.jouerCoupIA(p);
+												}
+												else if(niveau == 2){
+													ia.jouerCoupIANiveau3(p, joueur, 5);
+												}
+												else {
+													ia.jouerCoupIANiveau3(p, joueur, 16);
+												}
+												//recupérer la position du dernier coup joué pour positionner le coup de l'IA dans l'affichage
+												//button[ligne du dernier coup][colonne du dernier coup].setText("O")
+												int v = ia.getDerniereLigne();
+												int w = ia.getDerniereColonne();
+												button[v][w].setText("O");
+												button[v][w].setEnabled(false);
+												panCentre.validate();
+												if(p.aGagne(joueur)) {
+													JOptionPane.showMessageDialog(null, "Vous avez gagné !", "Erreur", 
+															JOptionPane.INFORMATION_MESSAGE);
+												}
+												else if(p.aGagne(ia)) {
+													JOptionPane.showMessageDialog(null, "Vous avez perdu !", "Erreur", 
+															JOptionPane.INFORMATION_MESSAGE);
+												}
+											}
+											else if(p.aGagne(joueur)) {
+												JOptionPane.showMessageDialog(null, "Vous avez gagné !", "Erreur", 
+														JOptionPane.INFORMATION_MESSAGE);
+											}
+											else if(p.aGagne(ia)) {
+												JOptionPane.showMessageDialog(null, "Vous avez perdu !", "Erreur", 
+														JOptionPane.INFORMATION_MESSAGE);
+											}
+										}
+										else if(p.aGagne(joueur)) {
+											JOptionPane.showMessageDialog(null, "Vous avez gagné !", "Erreur", 
+													JOptionPane.INFORMATION_MESSAGE);
+										}
+										else if(p.aGagne(ia)) {
+											JOptionPane.showMessageDialog(null, "Vous avez perdu !", "Erreur", 
+													JOptionPane.INFORMATION_MESSAGE);
+										}
+									}
+								}
+							}
+						}
+					}
+				});
+				panCentre.add(button[i][k]);
 			}
+		}
+		if(commence == 0) {
+			if(niveau == 1) {
+				ia.jouerCoupIA(p);
+			}
+			else if(niveau == 2) {
+				ia.jouerCoupIANiveau3(p, joueur, 5);
+			}
+			else {
+				ia.jouerCoupIANiveau3(p, joueur, 16);
+			}
+			commence++;
+			
+			//recupérer la position du dernier coup joué pour positionner le coup de l'IA dans l'affichage
+			//button[ligne du dernier coup][colonne du dernier coup].setText("O")
+			int v = ia.getDerniereLigne();
+			int w = ia.getDerniereColonne();
+			button[v][w].setText("O");
+			button[v][w].setEnabled(false);
 		}
 	}
 	

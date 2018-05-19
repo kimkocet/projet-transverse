@@ -18,4 +18,10 @@ public class IANiveau1 extends IA {
 		jouerCoup(l, c, plateau);
 	}
 
+	@Override
+	public void jouerCoupIANiveau3(Plateau plateau, Joueur j1, int profondeur) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

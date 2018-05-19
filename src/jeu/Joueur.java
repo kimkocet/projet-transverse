@@ -58,13 +58,13 @@ public class Joueur implements Cloneable {
 	public boolean coupPossible(int l, int c, Plateau plateau) {
 		// si la case est déjà occupée
 		if(plateau.getPlateau()[l][c] != 0) {
-			System.out.println("Case (" + l + ";" + c + ") déjà jouée");
+			//System.out.println("Case (" + l + ";" + c + ") déjà jouée");
 			return false;
 		}
 		// cas du premier coup (ne peut pas être joué sur les 4 cases du milieu)
 		if(coupPrecedent[0] == -2 && coupPrecedent[1] == -2) {
 			if((l == 1 || l == 2) && (c == 1 || c == 2)) {
-				System.out.println("Vous ne pouvez pas jouer ici au premier tour !");
+				//System.out.println("Vous ne pouvez pas jouer ici au premier tour !");
 				return false;
 			}
 		}
@@ -77,7 +77,7 @@ public class Joueur implements Cloneable {
 			l == coupPrecedent[0]+1 && c == coupPrecedent[1]-1 ||
 			l == coupPrecedent[0]+1 && c == coupPrecedent[1] ||
 			l == coupPrecedent[0]+1 && c == coupPrecedent[1]+1) {
-			System.out.println("Vous ne pouvez pas jouer aux cases adjacentes");
+			//System.out.println("Vous ne pouvez pas jouer aux cases adjacentes");
 			return false;
 		}
 		return true;
