@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,13 +29,12 @@ public class Affichage extends JFrame {
 	private JPanel panCentre = new JPanel();
 	private Plateau p;
 	private JButton button[][] = new JButton[4][4];
+	
+	JButton commencer = new JButton("Commencer");
 	private IA ia;
 	private Joueur joueur;
 	int ligne;
 	int colonne;
-	int count;
-	int temoin;
-	boolean flag;
 	int niveau;
 	int commence;
 
@@ -49,21 +49,72 @@ public class Affichage extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(panCentre);
 		vueAccueil(panCentre);
-//		affichageTableau(panCentre);
-		panCentre.setLayout(new GridLayout(4, 4));
-		count = 0;
 		this.setVisible(true);
 	}
 
 	public void vueAccueil(JPanel panCentre) {
 		JPanel panHello = new JPanel();
-		panHello.setPreferredSize(new Dimension(700, 30));
+		panHello.setBackground(Color.white);
+		panHello.setPreferredSize(new Dimension(700,40));
 		JLabel hello = new JLabel("Défiez le terrible Morgpion !");
-		panHello.add(hello);
+		panHello.add(hello);		
+		
+		JComboBox combo = new JComboBox();
+		JLabel level = new JLabel("Veuillez choisir un niveau : ");
+		JPanel panniveau = new JPanel();
+		panniveau.setPreferredSize(new Dimension(700, 40));
+		panniveau.setBackground(Color.white);
+		combo.setPreferredSize(new Dimension(100, 20));
+		combo.addItem("1");
+		combo.addItem("2");
+		combo.addItem("3");
+		JButton valider = new JButton("	OK	");
+		valider.addActionListener(new ActionListener()
+				{
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						String typeSelect = (String)combo.getSelectedItem();
+						niveau = Integer.parseInt(typeSelect);
+					}
+			
+				});
+		panniveau.add(level);
+		panniveau.add(combo);
+		panniveau.add(valider);
+		
+		JComboBox combo2 = new JComboBox();
+		JLabel start = new JLabel("Voulez-vous commencer ? : ");
+		JPanel panStart = new JPanel();
+		panStart.setPreferredSize(new Dimension(700, 40));
+		combo2.setPreferredSize(new Dimension(100, 20));
+		combo2.addItem("Oui");
+		combo2.addItem("Non");
+		JButton valider2 = new JButton(" 	OK	");
+		valider2.addActionListener(new ActionListener()
+		{
+			// selection de qui commence (1 = le joueur commence, 0 = l'IA commence)
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String typeSelect = (String)combo2.getSelectedItem();
+				if(typeSelect == "Oui") {
+					commence = 1;
+				}
+				else {
+					commence = 0;
+				}
+			}
+	
+		});
+		panStart.add(start);
+		panStart.add(combo2);
+		panStart.add(valider2);
+		
 
 		JPanel panCommencer = new JPanel();
 		panCommencer.setPreferredSize(new Dimension(700, 30));
-		JButton commencer = new JButton("Commencer");
 		panCommencer.add(commencer);
 
 		JPanel panCredit = new JPanel();
@@ -75,13 +126,15 @@ public class Affichage extends JFrame {
 		regle.setPreferredSize(new Dimension(100, 20));
 		panCredit.add(credit);
 		panCredit.add(regle);
+		
 
 		panCentre.add(panHello);
+		panCentre.add(panniveau);
+		panCentre.add(panStart);
 		panCentre.add(panCommencer);
 		panCentre.add(panCredit);
 		
 		// selection du niveau
-		niveau = 3;
 		switch(niveau) {
 			case 1:
 				ia = new IANiveau1(2);
@@ -94,14 +147,15 @@ public class Affichage extends JFrame {
 				break;
 		}
 		
-		// selection de qui commence (1 = le joueur commence, 0 = l'IA commence)
-		commence = 0;
+		System.out.println(niveau);
+		System.out.println(commence);
 
 		commencer.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				System.out.println(niveau);
+				System.out.println(commence);
 				panCentre.removeAll();
 				panCentre.repaint();
 				affichageTableau(panCentre);
@@ -113,7 +167,6 @@ public class Affichage extends JFrame {
 
 	void affichageTableau(JPanel panCentre) {
 		panCentre.setLayout(new GridLayout(4, 4));
-		count = 0;
 		for (int i = 0; i < 4; i++) {
 			for (int k = 0; k < 4; k++) {
 				button[i][k] = new JButton();
