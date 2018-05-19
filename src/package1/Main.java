@@ -11,7 +11,10 @@ import jeu.Plateau;
 import vue.Affichage;
 
 public class Main {
+<<<<<<< HEAD
 	
+=======
+>>>>>>> ef1df9c9bdd4664d7976fb379991a0950c90be75
 	public static void menu() {
 		System.out.println("Choix du niveau (1, 2 ou 3) : ");
 		Scanner sc = new Scanner(System.in);
@@ -21,6 +24,11 @@ public class Main {
 		} while(niveau < 1 || niveau > 3);
 		Plateau p = new Plateau();
 		System.out.println(p);
+<<<<<<< HEAD
+=======
+		
+		IANiveau3 ia = new IANiveau3(2);
+>>>>>>> ef1df9c9bdd4664d7976fb379991a0950c90be75
 		Joueur j1 = new Joueur(1);
 		IA ia;
 		switch(niveau) {
@@ -113,11 +121,17 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+<<<<<<< HEAD
 		//menu();
 		Plateau p = new Plateau();
 		IANiveau3 ia = new IANiveau3(2);
 		Joueur j1 = new Joueur(1);
 		Affichage a = new Affichage(p, ia, j1);
+=======
+		menu();
+	
+	
+>>>>>>> ef1df9c9bdd4664d7976fb379991a0950c90be75
 	}
 
 }
