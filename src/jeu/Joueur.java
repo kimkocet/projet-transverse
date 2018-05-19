@@ -2,6 +2,11 @@ package jeu;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import vue.Affichage;
+
 public class Joueur implements Cloneable {
 	int numero;
 	int[] coupPrecedent = new int[2];
@@ -16,6 +21,14 @@ public class Joueur implements Cloneable {
 		return numero;
 	}
 	
+	public int getDerniereLigne(){
+		return coupPrecedent[0];
+	}
+	
+	public int getDerniereColonne(){
+		return coupPrecedent[1];
+	}
+	
 	// place un pion sur la ligne 'l' et la colonne 'c'
 	public boolean jouerCoup(int l, int c, Plateau plateau) {
 		if(coupPossible(l,c, plateau)) {
@@ -26,6 +39,8 @@ public class Joueur implements Cloneable {
 		}
 		else {
 			System.out.println("Ce coup ne peut pas être joué !");
+			JOptionPane.showMessageDialog(null, "Cette case a déjà été jouée !", "Erreur", 
+					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 	}
@@ -44,10 +59,14 @@ public class Joueur implements Cloneable {
 	
 	protected boolean coupPossible(int l, int c, Plateau plateau) {
 		// si la case est déjà occupée
-		if(plateau.getPlateau()[l][c] != 0) return false;
+		if(plateau.getPlateau()[l][c] != 0) {
+			System.out.println("Case (" + l + ";" + c + ") déjà jouée");
+			return false;
+		}
 		// cas du premier coup (ne peut pas être joué sur les 4 cases du milieu)
 		if(coupPrecedent[0] == -2 && coupPrecedent[1] == -2) {
 			if((l == 1 || l == 2) && (c == 1 || c == 2)) {
+				System.out.println("Vous ne pouvez pas jouer ici au premier tour !");
 				return false;
 			}
 		}
@@ -59,7 +78,10 @@ public class Joueur implements Cloneable {
 			l == coupPrecedent[0] && c == coupPrecedent[1]+1 ||
 			l == coupPrecedent[0]+1 && c == coupPrecedent[1]-1 ||
 			l == coupPrecedent[0]+1 && c == coupPrecedent[1] ||
-			l == coupPrecedent[0]+1 && c == coupPrecedent[1]+1) return false;
+			l == coupPrecedent[0]+1 && c == coupPrecedent[1]+1) {
+			System.out.println("Vous ne pouvez pas jouer aux cases adjacentes");
+			return false;
+		}
 		return true;
 	}
 	
