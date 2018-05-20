@@ -114,6 +114,10 @@ public class Affichage extends JFrame {
 		frameRegle.add(panRegle);
 		frameRegle.setVisible(true);
 		
+		JLabel regle1 = new JLabel("- Les 4 cases centrales ne peuvent être jouées au premier tour !");
+		JLabel regle2 = new JLabel("- Il est interdit de jouer sur les cases adjacentes au precedant coup !");
+		JLabel regle3 = new JLabel("- Il est formellement interdit de s'en prendre à l'IA si vous ne pouvez pas gagner !");
+		
 		frameRegle.setLayout(new GridBagLayout());
 		frameRegle.setBackground(Color.white);
 		GridBagConstraints position = new GridBagConstraints();
@@ -123,6 +127,18 @@ public class Affichage extends JFrame {
 		position.weighty = 1;
 		position.gridwidth = 1;
 		position.gridheight = 1;
+		
+		position.gridx = 0;
+		position.gridy = 1;
+		frameRegle.add(regle1, position);
+		
+		position.gridx = 0;
+		position.gridy = 2;
+		frameRegle.add(regle2, position);
+		
+		position.gridx = 0;
+		position.gridy = 3;
+		frameRegle.add(regle3, position);
 	}
 
 	public void vueAccueil(JPanel panCentre) {
