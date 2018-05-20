@@ -59,7 +59,7 @@ public class Affichage extends JFrame {
 		JLabel hello = new JLabel("Défiez le terrible Morgpion !");
 		panHello.add(hello);		
 		
-		JComboBox combo = new JComboBox();
+		JComboBox<String> combo = new JComboBox<String>();
 		JLabel level = new JLabel("Veuillez choisir un niveau : ");
 		JPanel panniveau = new JPanel();
 		panniveau.setPreferredSize(new Dimension(700, 40));
@@ -68,6 +68,9 @@ public class Affichage extends JFrame {
 		combo.addItem("1");
 		combo.addItem("2");
 		combo.addItem("3");
+		
+		commencer.setEnabled(false);
+		
 		JButton valider = new JButton("	OK	");
 		valider.addActionListener(new ActionListener()
 				{
@@ -84,7 +87,7 @@ public class Affichage extends JFrame {
 		panniveau.add(combo);
 		panniveau.add(valider);
 		
-		JComboBox combo2 = new JComboBox();
+		JComboBox<String> combo2 = new JComboBox<String>();
 		JLabel start = new JLabel("Voulez-vous commencer ? : ");
 		JPanel panStart = new JPanel();
 		panStart.setPreferredSize(new Dimension(700, 40));
@@ -101,9 +104,11 @@ public class Affichage extends JFrame {
 				String typeSelect = (String)combo2.getSelectedItem();
 				if(typeSelect == "Oui") {
 					commence = 1;
+					commencer.setEnabled(true);
 				}
 				else {
 					commence = 0;
+					commencer.setEnabled(false);
 				}
 			}
 	

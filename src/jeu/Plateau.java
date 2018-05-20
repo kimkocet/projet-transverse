@@ -427,9 +427,9 @@ public class Plateau implements Cloneable {
 					if(plateau[i][col+j] == j1.getNumero()) {
 						compteurJ1++;
 					}
-					else if(plateau[i][col+j] == j2.getNumero()) {
+					/*else if(plateau[i][col+j] == j2.getNumero()) {		//ERREUR
 						compteurJ2++;
-					}
+					}*/
 				}
 				if(compteurJ1 == 3) {
 					System.out.println("Le joueur 1 a gagné !");
@@ -453,9 +453,9 @@ public class Plateau implements Cloneable {
 					if(plateau[i+ligne][j] == j1.getNumero()) {
 						compteurJ1++;
 					}
-					else if(plateau[i+ligne][j] == j2.getNumero()) {
+					/*else if(plateau[i+ligne][j] == j2.getNumero()) {			//ERREUR
 						compteurJ2++;
-					}
+					}*/
 				}
 				if(compteurJ1 == 3) {
 					System.out.println("Le joueur 1 a gagné !");
@@ -476,9 +476,9 @@ public class Plateau implements Cloneable {
 				if(plateau[deb+i][deb+i] == j1.getNumero()) {
 					compteurJ1++;
 				}
-				if(plateau[deb+i][deb+i] == j2.getNumero()) {
+				/*if(plateau[deb+i][deb+i] == j2.getNumero()) {					//ERREUR
 					compteurJ2++;
-				}
+				}*/
 			}
 			if(compteurJ1 == 3) {
 				System.out.println("Le joueur 1 a gagné !");
@@ -497,9 +497,9 @@ public class Plateau implements Cloneable {
 				if(plateau[deb+i][SIZE-(deb+i)-1] == j1.getNumero()) {
 					compteurJ1++;
 				}
-				if(plateau[deb+i][SIZE-(deb+i)-1] == j2.getNumero()) {
+				/*if(plateau[deb+i][SIZE-(deb+i)-1] == j2.getNumero()) {		//ERREUR
 					compteurJ2++;
-				}
+				}*/
 			}
 			if(compteurJ1 == 3) {
 				System.out.println("Le joueur 1 a gagné !");
@@ -517,9 +517,9 @@ public class Plateau implements Cloneable {
 			if(plateau[i][i-1] == j1.getNumero()) {
 				compteurJ1++;
 			}
-			if(plateau[i][i-1] == j2.getNumero()) {
+			/*if(plateau[i][i-1] == j2.getNumero()) {			//ERREUR
 				compteurJ2++;
-			}
+			}*/
 		}
 		if(compteurJ1 == 3) {
 			System.out.println("Le joueur 1 a gagné !");
@@ -535,9 +535,9 @@ public class Plateau implements Cloneable {
 			if(plateau[i][i+1] == j1.getNumero()) {
 				compteurJ1++;
 			}
-			if(plateau[i][i+1] == j2.getNumero()) {
+			/*if(plateau[i][i+1] == j2.getNumero()) {		//ERREUR
 				compteurJ2++;
-			}
+			}*/
 		}
 		if(compteurJ1 == 3) {
 			System.out.println("Le joueur 1 a gagné !");
@@ -553,9 +553,9 @@ public class Plateau implements Cloneable {
 			if(plateau[i][SIZE-i] == j1.getNumero()) {
 				compteurJ1++;
 			}
-			if(plateau[i][SIZE-i] == j2.getNumero()) {
+			/*if(plateau[i][SIZE-i] == j2.getNumero()) {
 				compteurJ2++;
-			}
+			}*/
 		}
 		if(compteurJ1 == 3) {
 			System.out.println("Le joueur 1 a gagné !");
@@ -571,9 +571,9 @@ public class Plateau implements Cloneable {
 			if(plateau[i][SIZE-2-i] == j1.getNumero()) {
 				compteurJ1++;
 			}
-			if(plateau[i][SIZE-2-i] == j2.getNumero()) {
+			/*if(plateau[i][SIZE-2-i] == j2.getNumero()) {			//ERREUR
 				compteurJ2++;
-			}
+			}*/
 		}
 		if(compteurJ1 == 3) {
 			System.out.println("Le joueur 1 a gagné !");
