@@ -1,8 +1,11 @@
 package vue;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +30,8 @@ public class Affichage extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel panCentre = new JPanel();
+	private JPanel panCredit = new JPanel();
+	private JPanel panRegle = new JPanel();
 	private Plateau p;
 	private JButton button[][] = new JButton[4][4];
 
@@ -53,6 +58,72 @@ public class Affichage extends JFrame {
 		vueAccueil(panCentre);
 		this.setVisible(true);
 	}
+	
+	public void affichageCredit() {
+		JFrame frameCredit = new JFrame();
+		frameCredit.setTitle("Les crédits !");
+		frameCredit.setSize(700, 600);
+		frameCredit.setLocation(50, 300);
+		frameCredit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frameCredit.add(panCredit);
+		frameCredit.setVisible(true);
+		
+		JLabel wael = new JLabel("Ali Baba et les 40 voleurs : Wael Hage !");
+		JLabel kim = new JLabel("Kim la survivante : Kim Kocet !");
+		JLabel elsa = new JLabel("ProCode2.0 : Elsa Charpentier !");
+		JLabel morgan = new JLabel("I'm Batman, je vis la nuit : Morgan Wolf !");
+		JLabel anthony = new JLabel(" 'Insérer anecdotes' : Anthony Leguay !");
+		
+		frameCredit.setLayout(new GridBagLayout());
+		frameCredit.setBackground(Color.white);
+		GridBagConstraints position = new GridBagConstraints();
+		position.ipadx = 0;
+		position.ipady = 0;
+		position.weightx = 1;
+		position.weighty = 1;
+		position.gridwidth = 1;
+		position.gridheight = 1;
+
+		position.gridx = 0;
+		position.gridy = 1;
+		frameCredit.add(wael, position);
+		
+		position.gridx = 0;
+		position.gridy = 2;
+		frameCredit.add(kim, position);
+		
+		position.gridx = 0;
+		position.gridy = 3;
+		frameCredit.add(elsa, position);
+		
+		position.gridx = 0;
+		position.gridy = 4;
+		frameCredit.add(morgan, position);
+		
+		position.gridx = 0;
+		position.gridy = 5;
+		frameCredit.add(anthony, position);
+	}
+	
+	public void afficherRegles() {
+		JFrame frameRegle = new JFrame();
+		frameRegle.setTitle("Les regles !");
+		frameRegle.setSize(700, 600);
+		frameRegle.setLocation(1150, 300);
+		frameRegle.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frameRegle.add(panRegle);
+		frameRegle.setVisible(true);
+		
+		frameRegle.setLayout(new GridBagLayout());
+		frameRegle.setBackground(Color.white);
+		GridBagConstraints position = new GridBagConstraints();
+		position.ipadx = 0;
+		position.ipady = 0;
+		position.weightx = 1;
+		position.weighty = 1;
+		position.gridwidth = 1;
+		position.gridheight = 1;
+	}
 
 	public void vueAccueil(JPanel panCentre) {
 		JPanel panHello = new JPanel();
@@ -71,9 +142,11 @@ public class Affichage extends JFrame {
 		combo.addItem("2");
 		combo.addItem("3");
 
+		JButton valider = new JButton("	OK	");
+		JButton valider2 = new JButton(" 	OK	");
+		valider2.setEnabled(false);
 		commencer.setEnabled(false);
 
-		JButton valider = new JButton("	OK	");
 		valider.addActionListener(new ActionListener() {
 
 			@Override
@@ -81,6 +154,7 @@ public class Affichage extends JFrame {
 				// TODO Auto-generated method stub
 				String typeSelect = (String) combo.getSelectedItem();
 				niveau = Integer.parseInt(typeSelect);
+				valider2.setEnabled(true);
 			}
 
 		});
@@ -89,25 +163,23 @@ public class Affichage extends JFrame {
 		panniveau.add(valider);
 
 		JComboBox<String> combo2 = new JComboBox<String>();
-		JLabel start = new JLabel("Voulez-vous commencer ? : ");
+		JLabel start = new JLabel("Voulez-vous jouer en premier ? : ");
 		JPanel panStart = new JPanel();
 		panStart.setPreferredSize(new Dimension(700, 40));
 		combo2.setPreferredSize(new Dimension(100, 20));
 		combo2.addItem("Oui");
 		combo2.addItem("Non");
-		JButton valider2 = new JButton(" 	OK	");
 		valider2.addActionListener(new ActionListener() {
 			// selection de qui commence (1 = le joueur commence, 0 = l'IA commence)
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String typeSelect = (String) combo2.getSelectedItem();
+				commencer.setEnabled(true);
 				if (typeSelect == "Oui") {
 					commence = 1;
-					commencer.setEnabled(true);
 				} else {
 					commence = 0;
-					commencer.setEnabled(false);
 				}
 			}
 
@@ -125,8 +197,22 @@ public class Affichage extends JFrame {
 
 		JButton credit = new JButton("Credit");
 		credit.setPreferredSize(new Dimension(100, 20));
+		
+		credit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				affichageCredit();
+			}
+		});
+		
 		JButton regle = new JButton("Règles");
 		regle.setPreferredSize(new Dimension(100, 20));
+		
+		regle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				afficherRegles();
+			}
+		});
+		
 		panCredit.add(credit);
 		panCredit.add(regle);
 
@@ -135,20 +221,9 @@ public class Affichage extends JFrame {
 		panCentre.add(panStart);
 		panCentre.add(panCommencer);
 		panCentre.add(panCredit);
-
-		// selection du niveau
-		// switch(niveau) {
-		// case 1:
-		// ia = new IANiveau1(2);
-		// break;
-		// case 2:
-		// ia = new IANiveau3(2);
-		// break;
-		// case 3:
-		// ia = new IANiveau3(2);
-		// break;
-		// }
-		System.out.println("hello : " + ia1.getNumero());
+		
+	
+		
 		System.out.println(niveau);
 		System.out.println(commence);
 
