@@ -63,7 +63,7 @@ public class Affichage extends JFrame {
 		JFrame frameCredit = new JFrame();
 		frameCredit.setTitle("Les crédits !");
 		frameCredit.setSize(700, 600);
-		frameCredit.setLocation(50, 300);
+		frameCredit.setLocation(1, 64);
 		frameCredit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameCredit.add(panCredit);
 		frameCredit.setVisible(true);
@@ -114,7 +114,7 @@ public class Affichage extends JFrame {
 		JFrame frameRegle = new JFrame();
 		frameRegle.setTitle("Les regles !");
 		frameRegle.setSize(700, 600);
-		frameRegle.setLocation(1150, 300);
+		frameRegle.setLocation(670, 64);
 		frameRegle.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameRegle.add(panRegle);
 		frameRegle.setVisible(true);
@@ -196,8 +196,8 @@ public class Affichage extends JFrame {
 		panStart.setBackground(Color.WHITE);
 		panStart.setPreferredSize(new Dimension(700, 40));
 		combo2.setPreferredSize(new Dimension(100, 20));
-		combo2.addItem("Oui");
 		combo2.addItem("Non");
+		combo2.addItem("Oui");
 		valider2.addActionListener(new ActionListener() {
 			// selection de qui commence (1 = le joueur commence, 0 = l'IA commence)
 			@Override
