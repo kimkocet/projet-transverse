@@ -69,10 +69,15 @@ public class Affichage extends JFrame {
 		frameCredit.setVisible(true);
 		
 		JLabel wael = new JLabel("Ali Baba et les 40 voleurs : Wael Hage !");
+		wael.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		JLabel kim = new JLabel("Kim la survivante : Kim Kocet !");
+		kim.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		JLabel elsa = new JLabel("ProCode2.0 : Elsa Charpentier !");
+		elsa.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		JLabel morgan = new JLabel("I'm Batman, je vis la nuit : Morgan Wolf !");
-		JLabel anthony = new JLabel(" 'Insérer anecdotes' : Anthony Leguay !");
+		morgan.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		JLabel anthony = new JLabel(" Générateur d'anecdotes : Anthony Leguay !");
+		anthony.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		
 		frameCredit.setLayout(new GridBagLayout());
 		frameCredit.setBackground(Color.white);
@@ -115,8 +120,11 @@ public class Affichage extends JFrame {
 		frameRegle.setVisible(true);
 		
 		JLabel regle1 = new JLabel("- Les 4 cases centrales ne peuvent être jouées au premier tour !");
-		JLabel regle2 = new JLabel("- Il est interdit de jouer sur les cases adjacentes au precedant coup !");
+		regle1.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		JLabel regle2 = new JLabel("- Il est interdit de jouer sur les cases adjacentes au précédent coup !");
+		regle2.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		JLabel regle3 = new JLabel("- Il est formellement interdit de s'en prendre à l'IA si vous ne pouvez pas gagner !");
+		regle3.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		
 		frameRegle.setLayout(new GridBagLayout());
 		frameRegle.setBackground(Color.white);
@@ -142,14 +150,17 @@ public class Affichage extends JFrame {
 	}
 
 	public void vueAccueil(JPanel panCentre) {
+		panCentre.setBackground(Color.WHITE);
 		JPanel panHello = new JPanel();
 		panHello.setBackground(Color.white);
-		panHello.setPreferredSize(new Dimension(700, 40));
+		panHello.setPreferredSize(new Dimension(700, 50));
 		JLabel hello = new JLabel("Défiez le terrible Morgpion !");
+		hello.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 		panHello.add(hello);
 
 		JComboBox<String> combo = new JComboBox<String>();
 		JLabel level = new JLabel("Veuillez choisir un niveau : ");
+		level.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		JPanel panniveau = new JPanel();
 		panniveau.setPreferredSize(new Dimension(700, 40));
 		panniveau.setBackground(Color.white);
@@ -180,7 +191,9 @@ public class Affichage extends JFrame {
 
 		JComboBox<String> combo2 = new JComboBox<String>();
 		JLabel start = new JLabel("Voulez-vous jouer en premier ? : ");
+		start.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		JPanel panStart = new JPanel();
+		panStart.setBackground(Color.WHITE);
 		panStart.setPreferredSize(new Dimension(700, 40));
 		combo2.setPreferredSize(new Dimension(100, 20));
 		combo2.addItem("Oui");
@@ -205,13 +218,17 @@ public class Affichage extends JFrame {
 		panStart.add(valider2);
 
 		JPanel panCommencer = new JPanel();
-		panCommencer.setPreferredSize(new Dimension(700, 30));
+		panCommencer.setBackground(Color.WHITE);
+		panCommencer.setPreferredSize(new Dimension(700, 45));
 		panCommencer.add(commencer);
+		commencer.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 
 		JPanel panCredit = new JPanel();
+		panCredit.setBackground(Color.WHITE);
 		panCredit.setPreferredSize(new Dimension(700, 30));
 
 		JButton credit = new JButton("Credit");
+		credit.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 		credit.setPreferredSize(new Dimension(100, 20));
 		
 		credit.addActionListener(new ActionListener() {
@@ -221,6 +238,7 @@ public class Affichage extends JFrame {
 		});
 		
 		JButton regle = new JButton("Règles");
+		regle.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 		regle.setPreferredSize(new Dimension(100, 20));
 		
 		regle.addActionListener(new ActionListener() {
